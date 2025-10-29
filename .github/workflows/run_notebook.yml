@@ -23,9 +23,10 @@ jobs:
           pip install jupyter nbconvert
           pip install -r requirements.txt || echo "No hay requirements.txt, continuando..."
 
-      - name: Ejecutar notebook
+      - name: Ejecutar notebook con historial diario
         run: |
-          jupyter nbconvert --to notebook --execute v_2_APITESTfinal.ipynb --output resultado_ejecucion.ipynb
+          OUTPUT_FILE="resultado_$(date +'%Y-%m-%d').ipynb"
+          jupyter nbconvert --to notebook --execute v_2_APITESTfinal.ipynb --output $OUTPUT_FILE
 
       - name: Configurar git
         run: |
@@ -34,6 +35,6 @@ jobs:
 
       - name: Commit y push del notebook ejecutado
         run: |
-          git add resultado_ejecucion.ipynb
+          git add resultado_$(date +'%Y-%m-%d').ipynb
           git commit -m "Notebook ejecutado automáticamente $(date +'%Y-%m-%d %H:%M:%S')" || echo "No hay cambios para commitear"
           git push
