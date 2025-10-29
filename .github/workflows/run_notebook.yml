@@ -1,4 +1,4 @@
-name: Ejecutar APITESTfinal.ipynb automáticamente
+name: Ejecutar v_2_APITESTfinal automáticamente
 
 on:
   schedule:
@@ -25,4 +25,4 @@ jobs:
 
       - name: Ejecutar notebook
         run: |
-          jupyter nbconvert --to notebook --execute APITESTfinal.ipynb --output resultado_ejecucion.ipynb
+          jupyter nbconvert --to notebook --execute v_2_APITESTfinal.ipynb --output resultado_ejecucion.ipynb
