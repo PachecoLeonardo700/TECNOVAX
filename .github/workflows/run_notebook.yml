@@ -26,3 +26,14 @@ jobs:
       - name: Ejecutar notebook
         run: |
           jupyter nbconvert --to notebook --execute v_2_APITESTfinal.ipynb --output resultado_ejecucion.ipynb
+
+      - name: Configurar git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit y push del notebook ejecutado
+        run: |
+          git add resultado_ejecucion.ipynb
+          git commit -m "Notebook ejecutado automáticamente $(date +'%Y-%m-%d %H:%M:%S')" || echo "No hay cambios para commitear"
+          git push
