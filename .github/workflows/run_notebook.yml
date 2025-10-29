@@ -34,8 +34,10 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Commit y push del notebook ejecutado
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add resultado_$(date +'%Y-%m-%d').ipynb
+          OUTPUT_FILE="resultado_$(date +'%Y-%m-%d').ipynb"
+          git add $OUTPUT_FILE
           git commit -m "Notebook ejecutado automáticamente $(date +'%Y-%m-%d %H:%M:%S')" || echo "No hay cambios para commitear"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
